@@ -1,0 +1,26 @@
+UITD "Casino" {
+  UI 0 "Navbar" actions {
+    clicks "logo"
+    clicks "home"
+    clicks "profile"
+    clicks "sign in"
+    clicks "sign up"
+  }
+  UI 1 "Sign in" actions {
+    clicks "login"
+    clicks "forgot password"
+    clicks "create account"
+  }
+  UI 2 "Sign up" actions {
+    clicks "sign up"
+    clicks "create account"
+  }
+  UI 3 "Forgot password" actions {
+    submits "send instructions"
+  }
+  UI 4 "Catalog" actions {
+    selects "carrera"
+    selects "puntos"
+    selects "
+  }
+}
