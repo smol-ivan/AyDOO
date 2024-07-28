@@ -1,0 +1,159 @@
+UITD "Casino" {
+  UI 0 "Navbar" actions {
+    clicks "logo"
+    clicks "deportes"
+    clicks "eventos en vivo" 
+    clicks "proximos eventos"
+    clicks "iniciar sesion"
+    clicks "crear cuenta"
+    clicks "perfil"
+  }
+  UI 1 "Home" actions {
+    clicks "promociones"
+    clicks "<cualquier juego>"
+  }
+  UI 2 "Inicio sesion" actions {
+    clicks "crear cuenta"
+    clicks "iniciar sesion"
+    clicks "olvide mi contraseña"
+  }
+  UI 3 "Registro" actions {
+    clicks "ya tengo una cuenta"
+    clicks "registrar"
+  }
+  UI 4 "Olvide mi contraseña" actions {
+    clicks "enviar instrucciones"
+  }
+  UI 5 "Deportes" actions {
+    clicks "todos"
+    clicks "versus"
+    clicks "carrera"
+    clicks "puntos"
+    clicks "<cualquier deporte>"
+  }
+  UI 6 "<Cualquier deporte>" actions{
+    clicks "<cualquier juego>"
+  }
+  UI 7 "Juego" actions {
+    clicks "enviar apuesta"
+  }
+  UI 8 "Pago" actions {
+    clicks "editar <cualquier metodo>"
+    clicks "agregar"
+    clicks "siguiente"
+    clicks "regresar"
+  }
+  UI 9 "Alta metodo pago" actions {
+    clicks "regresar"
+    clicks "agregar metodo"
+  }
+  UI 10 "Modificar metodo pago" actions {
+    clicks "guardar"
+    clicks "regresar"
+  }
+  UI 11 "Confirmar pago" actions {
+    clicks "regresar"
+    clicks "confirmar"
+  }
+  UI 12 "Pago confirmado" actions {
+    clicks "Ir a INICIO"
+  }
+  UI 13 "Pago no confirmado" actions {
+    clicks "Escoger otro metodo"
+    clicks "Reintentar pago"
+  }
+  UI 14 "proximos eventos" actions {
+    clicks "<cualquier juego>"
+    selects "<cualquier deporte de la lista>"
+    clicks "mostrar todos"
+  }
+  UI 15 "eventos en vivo" actions {
+    clicks "<cualquier juego>"
+  }
+  UI 16 "tarjeta guardada" actions {
+    clicks "ok"
+  }
+  UI 17 "tarjeta no guardada" actions {
+    clicks "cancelar"
+    clicks "reintentar"
+  }
+  FRAGMENT "Navegacion del casino de apuestas deportivas" {
+    DRAW {
+      0, 1(0), 2(0), 3(0), 4(0), 5(0), 6(0), 7(0), 8(0), 9(0), 10(0), 11(0), 12(0), 13(0), 14(0), 15(0), 16(0), 17(0)
+    }
+    TRANSITION from 0 to 1 if user clicks "logo";
+    TRANSITION from 0 to 2 if user clicks "iniciar sesion";
+    TRANSITION from 0 to 3 if user clicks "crear cuenta";
+    TRANSITION from 0 to 5 if user clicks "deportes";
+    TRANSITION from 0 to 14 if user clicks "proximos eventos";
+    TRANSITION from 0 to 15 if user clicks "eventos en vivo";
+
+    TRANSITION from 7 to 8 if user clicks "enviar apuesta" AND "is logged";
+    TRANSITION from 7 to 2 if user clicks "enviar apuesta" AND "is NOT logged";
+    TRANSITION from 8 to 7 if user clicks "regresar" AND "Se encontraba en 'juego'";
+
+    TRANSITION from 8 to 9 if user clicks "agregar";
+    TRANSITION from 9 to 8 if user clicks "regresar";
+
+    TRANSITION from 9 to 16 if user clicks "agregar metodo" AND "exito al guardar tarjeta";
+    TRANSITION from 9 to 17 if user clicks "agregar metodo" AND "error al guardar tarjeta";
+
+    TRANSITION from 16 to 7 if user clicks "ok" AND "se encontraba en Juego";
+    
+    TRANSITION from 17 to 9 if user clicks "cancelar" AND "se encontraba en Alta de metodo";
+    TRANSITION from 17 to 16 if user clicks "reintentar" AND "exito al guardar tarjeta";
+    TRANSITION from 17 to 17 if user clicks "reintentar" AND "error al guardar tarjeta";
+
+    TRANSITION from 8 to 10 if user clicks "editar <cualquier metodo>";
+    TRANSITION from 10 to 8 if user clicks "regresar";
+
+    TRANSITION from 10 to 16 if user clicks "guardar" AND "exito al guardar tarjeta";
+    TRANSITION from 10 to 17 if user clicks "guardar" AND "error al guardar tarjeta";
+    TRANSITION from 10 to 9 if user clicks "regresar";
+
+
+    TRANSITION from 16 to 7 if user clicks "ok" AND "se encontraba en Juego";
+    
+    TRANSITION from 17 to 16 if user clicks "reintentar" AND "exito al guardar tarjeta";
+    TRANSITION from 17 to 17 if user clicks "reintentar" AND "error al guardar tarjeta";
+    TRANSITION from 17 to 10 if user clicks "cancelar" AND "se encontraba en Editar metodo";
+
+    TRANSITION from 8 to 11 if user clicks "siguiente";
+    TRANSITION from 11 to 8 if user clicks "regresar";
+
+    TRANSITION from 11 to 12 if user clicks "confirmar" AND "exito en el pago";
+    TRANSITION from 12 to 1 if user clicks "Ir a INICIO";
+
+    TRANSITION from 11 to 13 if user clicks "confirmar" AND "error en el pago";
+    TRANSITION from 13 to 12 if user clicks "Reintentar pago" AND "exito en el pago";
+    TRANSITION from 13 to 13 if user clicks "Reintentar pago" AND "error en el pago";
+    TRANSITION from 13 to 8 if user clicks "Escoger otro metodo";
+
+    TRANSITION from 15 to 7 if user clicks "<cualquier juego>";
+
+    TRANSITION from 14 to 7 if user clicks "<cualquier juego>";
+    TRANSITION from 14 to 14 if user selects "<cualquier deporte de la lista>";
+    TRANSITION from 14 to 14 if user clicks "mostrar todos";
+
+    TRANSITION from 2 to 2 if user clicks "iniciar sesion" AND "is NOT ok";
+    TRANSITION from 2 to 1 if user clicks "iniciar sesion" AND "is ok";
+    TRANSITION from 2 to 3 if user clicks "crear cuenta";
+    TRANSITION from 2 to 4 if user clicks "olvide mi contraseña";
+    
+    TRANSITION from 3 to 2 if user clicks "ya tengo una cuenta";
+    TRANSITION from 3 to 1 if user clicks "registrar" AND "is ok";
+    TRANSITION from 3 to 3 if user clicks "registrar" AND "is NOT ok";
+
+    TRANSITION from 5 to 6 if user clicks "<cualquier deporte>";
+    TRANSITION from 5 to 5 if user clicks "todos";
+    TRANSITION from 5 to 5 if user clicks "versus";
+    TRANSITION from 5 to 5 if user clicks "carrera";
+    TRANSITION from 5 to 5 if user clicks "puntos";
+
+    TRANSITION from 6 to 7 if user clicks "<cualquier juego>";
+
+    TRANSITION from 4 to 4 if user clicks "enviar instrucciones";
+
+    TRANSITION from 1 to 7 if user clicks "<cualquier juego>";
+  }
+}
