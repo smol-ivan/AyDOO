@@ -1,86 +1,86 @@
 UITD "Casino" {
   UI 0 "Navbar" actions {
-    clicks "logo"
-    clicks "deportes"
-    clicks "eventos en vivo" 
-    clicks "proximos eventos"
-    clicks "iniciar sesion"
-    clicks "crear cuenta"
-    clicks "perfil"
+    clicks "logo";
+    clicks "deportes";
+    clicks "eventos en vivo"; 
+    clicks "proximos eventos";
+    clicks "iniciar sesion";
+    clicks "crear cuenta";
+    clicks "perfil";
   }
   UI 1 "Home" actions {
-    clicks "promociones"
-    clicks "<cualquier juego>"
+    clicks "promociones";
+    clicks "<cualquier juego>";
   }
   UI 2 "Inicio sesion" actions {
-    clicks "crear cuenta"
-    clicks "iniciar sesion"
-    clicks "olvide mi contraseña"
+    clicks "crear cuenta";
+    clicks "iniciar sesion";
+    clicks "olvide mi contraseña";
   }
   UI 3 "Registro" actions {
-    clicks "ya tengo una cuenta"
-    clicks "registrar"
+    clicks "ya tengo una cuenta";
+    clicks "registrar";
   }
   UI 4 "Olvide mi contraseña" actions {
-    clicks "enviar instrucciones"
+    clicks "enviar instrucciones";
   }
   UI 5 "Deportes" actions {
-    clicks "todos"
-    clicks "versus"
-    clicks "carrera"
-    clicks "puntos"
-    clicks "<cualquier deporte>"
+    clicks "todos";
+    clicks "versus";
+    clicks "carrera";
+    clicks "puntos";
+    clicks "<cualquier deporte>";
   }
   UI 6 "<Cualquier deporte>" actions{
-    clicks "<cualquier juego>"
+    clicks "<cualquier juego>";
   }
   UI 7 "Juego" actions {
-    clicks "enviar apuesta"
+    clicks "enviar apuesta";
   }
   UI 8 "Pago" actions {
-    clicks "editar <cualquier metodo>"
-    clicks "agregar"
-    clicks "siguiente"
-    clicks "regresar"
+    clicks "editar <cualquier metodo>";
+    clicks "agregar";
+    clicks "siguiente";
+    clicks "regresar";
   }
   UI 9 "Alta metodo pago" actions {
-    clicks "regresar"
-    clicks "agregar metodo"
+    clicks "regresar";
+    clicks "agregar metodo";
   }
   UI 10 "Modificar metodo pago" actions {
-    clicks "guardar"
-    clicks "regresar"
+    clicks "guardar";
+    clicks "regresar";
   }
   UI 11 "Confirmar pago" actions {
-    clicks "regresar"
-    clicks "confirmar"
+    clicks "regresar";
+    clicks "confirmar";
   }
   UI 12 "Pago confirmado" actions {
-    clicks "Ir a INICIO"
+    clicks "Ir a INICIO";
   }
   UI 13 "Pago no confirmado" actions {
-    clicks "Escoger otro metodo"
-    clicks "Reintentar pago"
+    clicks "Escoger otro metodo";
+    clicks "Reintentar pago";
   }
   UI 14 "proximos eventos" actions {
-    clicks "<cualquier juego>"
-    selects "<cualquier deporte de la lista>"
-    clicks "mostrar todos"
+    clicks "<cualquier juego>";
+    selects "<cualquier deporte de la lista>";
+    clicks "mostrar todos";
   }
   UI 15 "eventos en vivo" actions {
-    clicks "<cualquier juego>"
+    clicks "<cualquier juego>";
   }
   UI 16 "tarjeta guardada" actions {
-    clicks "ok"
+    clicks "ok";
   }
   UI 17 "tarjeta no guardada" actions {
-    clicks "cancelar"
-    clicks "reintentar"
+    clicks "cancelar";
+    clicks "reintentar";
   }
   FRAGMENT "Navegacion del casino de apuestas deportivas" {
     DRAW {
       0, 1(0), 2(0), 3(0), 4(0), 5(0), 6(0), 7(0), 8(0), 9(0), 10(0), 11(0), 12(0), 13(0), 14(0), 15(0), 16(0), 17(0)
-    }
+    };
     TRANSITION from 0 to 1 if user clicks "logo";
     TRANSITION from 0 to 2 if user clicks "iniciar sesion";
     TRANSITION from 0 to 3 if user clicks "crear cuenta";
