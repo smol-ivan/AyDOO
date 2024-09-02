@@ -77,16 +77,34 @@ UITD "Casino" {
     clicks "cancelar";
     clicks "reintentar";
   }
-  FRAGMENT "Navegacion del casino de apuestas deportivas" {
+  FRAGMENT "Navegación del casino - Barra de Navegacion principal" {
     DRAW {
-      0, 1(0), 2(0), 3(0), 4(0), 5(0), 6(0), 7(0), 8(0), 9(0), 10(0), 11(0), 12(0), 13(0), 14(0), 15(0), 16(0), 17(0)
+      0, 1(0), 2(0), 3(0), 5(0), 14(0), 15(0)
     };
+
     TRANSITION from 0 to 1 if user clicks "logo";
     TRANSITION from 0 to 2 if user clicks "iniciar sesion";
     TRANSITION from 0 to 3 if user clicks "crear cuenta";
     TRANSITION from 0 to 5 if user clicks "deportes";
     TRANSITION from 0 to 14 if user clicks "proximos eventos";
     TRANSITION from 0 to 15 if user clicks "eventos en vivo";
+  }
+  FRAGMENT "Navegación del casino - Inicio de Sesión y Registro" {
+    DRAW {
+      1(0), 2(0), 3(0), 4(0)
+    };
+
+    TRANSITION from 2 to 2 if user clicks "iniciar sesion" AND "is NOT ok";
+    TRANSITION from 2 to 1 if user clicks "iniciar sesion" AND "is ok";
+    TRANSITION from 2 to 3 if user clicks "crear cuenta";
+    TRANSITION from 2 to 4 if user clicks "olvide mi contraseña";
+    
+    TRANSITION from 3 to 2 if user clicks "ya tengo una cuenta";
+    TRANSITION from 3 to 1 if user clicks "registrar" AND "is ok";
+    TRANSITION from 3 to 3 if user clicks "registrar" AND "is NOT ok";
+  }
+  FRAGMENT "Navegación del casino - Pago de apuesta & forma de pago" {
+    DRAW {7(0), 8(0), 2(0), 9(0), 16(0), 17(0), 10(0), 12(0), 1(0), 13(0), 11(0)};
 
     TRANSITION from 7 to 8 if user clicks "enviar apuesta" AND "is logged";
     TRANSITION from 7 to 2 if user clicks "enviar apuesta" AND "is NOT logged";
@@ -128,21 +146,17 @@ UITD "Casino" {
     TRANSITION from 13 to 12 if user clicks "Reintentar pago" AND "exito en el pago";
     TRANSITION from 13 to 13 if user clicks "Reintentar pago" AND "error en el pago";
     TRANSITION from 13 to 8 if user clicks "Escoger otro metodo";
+  }
+  FRAGMENT "Navegación del casino - Seleccion de deportes/juego & categoria" {
+    DRAW {
+      1(0), 4(0), 5(0), 6(0), 7(0), 14(0), 15(0)
+    };
 
     TRANSITION from 15 to 7 if user clicks "<cualquier juego>";
 
     TRANSITION from 14 to 7 if user clicks "<cualquier juego>";
     TRANSITION from 14 to 14 if user selects "<cualquier deporte de la lista>";
     TRANSITION from 14 to 14 if user clicks "mostrar todos";
-
-    TRANSITION from 2 to 2 if user clicks "iniciar sesion" AND "is NOT ok";
-    TRANSITION from 2 to 1 if user clicks "iniciar sesion" AND "is ok";
-    TRANSITION from 2 to 3 if user clicks "crear cuenta";
-    TRANSITION from 2 to 4 if user clicks "olvide mi contraseña";
-    
-    TRANSITION from 3 to 2 if user clicks "ya tengo una cuenta";
-    TRANSITION from 3 to 1 if user clicks "registrar" AND "is ok";
-    TRANSITION from 3 to 3 if user clicks "registrar" AND "is NOT ok";
 
     TRANSITION from 5 to 6 if user clicks "<cualquier deporte>";
     TRANSITION from 5 to 5 if user clicks "todos";
