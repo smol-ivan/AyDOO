@@ -1,0 +1,65 @@
+actor "Usuario" as u
+
+# del diagrama de despliegue
+# los módulos que se definieronparticipant ChangeMe1
+participantgroup #lightgreen *máquina\ncliente*
+participant "View (html,css,js)" as v
+end
+
+participantgroup #yellow *máquina servidor*
+  participant "controller.py" as co
+participant "Model.py" as model
+  participant "MySQL" as m
+end
+
+participant "Procesador Pago" as pp
+
+bottomparticipants 
+
+note over v:IU #9 Alta metodo pago
+
+alt 4.1: Alta metodo pago
+u->v:click en Agregar\n
+v->co:http.request{\n  "comando": "Agregar tarjeta",\n  "num_tarjeta": numero,\n  "nombre": nombre,\n  "fec_venc": fecha,\n  "cvv": cvv \n}
+co->model:alta_tarjeta(numero, nombre, fecha, cvv)
+model->pp:http.request{\n  "comando": "Solicitud autorizacion",\n  "num_tarjeta": numero,\n  "nombre": nombre,\n  "fec_venc": fecha,\n  "cvv": cvv\n  "informacion_casino": casino\n}
+  alt 4.1.1:Exito alta
+model<--pp:mensaje confirmacion
+m<--model:INSERT INTO metodo_pago\nVALUES(id_jugador, numero, cvv, fec_venc)
+model<-m:Success
+co<-model:True
+v<-co:http.response{\n  "comando": "navegar",\n  "pagina": tarjeta_guardada.html\n}
+u<-v:muestra UI #15
+u->v:click en OK
+note over v:continuar con 0.1
+  else 4.1.2 Fallo alta
+model<--pp:mensaje error
+  co<--model:False
+v<-co:http.response{\n  "comando": "navegar",\n  "pagina": tarjeta_no_guardada.html\n}
+u<-v:muestra UI #16
+note over v:UI #6
+  alt 4.1.2.1 Cancelar
+ 
+u->v:click en cancelar
+note over v:continuar con 0.1
+  else 4.1.2.2 Reintentar
+u->v:click en reintentar
+v->co:http.request{\n  "comando": reintentar,\n  "num_tarjeta": numero,\n  "nombre": nombre,\n  "fec_venc": fecha,\n  "cvv": cvv\n}
+v<-co:http.response{\n  "comando": navegar,\n  "datos_tarjeta": datos\n  "pagina": alta_metodo_pago.html\n}
+u<-v:muestra UI #9 
+note over v:UI #9
+  end
+
+    end
+
+  end
+group "0.1 ir a IU 2 Principal"
+v->co:http.request{\n  "comando": obtener eventos\n}
+  co->model:obtener_eventos()
+  model->m:SELECT *\nFROM events\nWHERE start_time > NOW()               \n   OR (start_time <= NOW() AND end_time >= NOW())\nORDER BY start_time DES\nLIMIT 20;  
+  model<--m:lista de tuplas
+  co<-model:[eventos]
+  v<--co:http response { \n  "comando":"navegar", \n  "página":"principal.html", \n  "eventos": eventos\n}
+  u<-v:muestra IU #2
+  note over v:IU #2 Principal
+end
